@@ -10,4 +10,9 @@
         android:name="com.mraha.imagesearchapp.ui.gallery.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.mraha.imagesearchapp.ui.favorite.FavoritesFragment"
+        android:label="favorites"
+        tools:layout="@layout/fragment_gallery" />
 </navigation>

@@ -1,7 +1,6 @@
 package com.mraha.imagesearchapp.api
 
-import com.mraha.imagesearchapp.BuildConfig
-import com.mraha.imagesearchapp.data.UnsplashPhoto
+import com.mraha.imagesearchapp.data.Photo
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -17,5 +16,5 @@ interface UnsplashApi {
     suspend fun searchPhotos(
         @Query("page") page: Int,
         @Query("limit") limit: Int
-    ): List<UnsplashPhoto>
+    ): List<Photo>
 }

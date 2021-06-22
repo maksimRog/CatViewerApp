@@ -1,15 +1,16 @@
 package com.mraha.imagesearchapp.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mraha.imagesearchapp.data.UnsplashPhoto
+import com.mraha.imagesearchapp.data.Photo
 
 @Dao
 interface ModelDao {
-    @Query("SELECT * FROM UnsplashPhoto")
-     fun getAll(): List<UnsplashPhoto>
+    @Query("SELECT * FROM Photo")
+     fun getAll(): LiveData<List<Photo>>
 
     @Insert
-     fun insertAll(vararg users: UnsplashPhoto)
+    suspend fun insertAll(vararg users: Photo)
 }

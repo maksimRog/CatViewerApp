@@ -5,17 +5,22 @@ import com.mraha.imagesearchapp.api.UnsplashApi
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val UNSPLASH_STARTING_PAGE_INDEX = 1
 
-class UnsplashPagingSource(
-    private val unsplashApi: UnsplashApi,
-) : PagingSource<Int, UnsplashPhoto>() {
+class PhotoPagingSource(
+    private val unsplashApi: UnsplashApi
+) : PagingSource<Int, Photo>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashPhoto> {
+
+    companion object {
+        private const val UNSPLASH_STARTING_PAGE_INDEX = 1
+    }
+
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
 
         return try {
-        val response = unsplashApi.searchPhotos( position, params.loadSize)
+            val response = unsplashApi.searchPhotos(position, params.loadSize)
 
             LoadResult.Page(
                 data = response,
@@ -28,4 +33,5 @@ class UnsplashPagingSource(
             LoadResult.Error(exception)
         }
     }
+
 }

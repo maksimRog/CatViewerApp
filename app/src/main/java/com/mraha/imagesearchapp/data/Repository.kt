@@ -8,7 +8,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashApi) {
+class Repository @Inject constructor(
+    private val unsplashApi: UnsplashApi,
+) {
 
     fun getSearchResults() =
         Pager(
@@ -16,6 +18,7 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
                 pageSize = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(unsplashApi ) }
+            pagingSourceFactory = { PhotoPagingSource(unsplashApi) }
         ).liveData
+
 }

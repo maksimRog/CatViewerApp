@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Image Search App</string>
+	    <string name="save_cat_to_favorites">save to favorites</string>
+    <string name="save_cat_to_downloads">download cat</string>
+    <string-array name="dialog_actions">
+        <item>@string/save_cat_to_favorites</item>
+        <item>@string/save_cat_to_downloads</item>
+    </string-array>
+    <integer name="write_to_storage_request">100</integer>
 </resources>

@@ -1,5 +1,6 @@
 package com.mraha.imagesearchapp.ui.gallery
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -7,11 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.mraha.imagesearchapp.ItemClickedDialog
 import com.mraha.imagesearchapp.R
 import com.mraha.imagesearchapp.data.UnsplashPhoto
 import com.mraha.imagesearchapp.databinding.ItemUnsplashPhotoBinding
 
-class UnsplashPhotoAdapter :
+class UnsplashPhotoAdapter(val galleryFragment: GalleryFragment) :
     PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
@@ -29,10 +31,19 @@ class UnsplashPhotoAdapter :
         }
     }
 
-    class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
+    inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private fun showDialogForPosition(position: Int) {
+            val bundle = Bundle()
+            bundle.putInt("position", position)
+            val dialog = ItemClickedDialog()
+            dialog.arguments = bundle
+            dialog.show(galleryFragment.childFragmentManager, "dialog fragment")
+        }
+
         fun bind(photo: UnsplashPhoto) {
+            itemView.setOnClickListener { showDialogForPosition(absoluteAdapterPosition) }
             binding.apply {
                 Glide.with(itemView)
                     .load(photo.url)
